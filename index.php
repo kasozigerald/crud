@@ -35,7 +35,7 @@
 </div>
  <?php
 // Include config file
-require_once 'config.php';
+require_once 'edit/config.php';
                     
 // Attempt select query execution
 $sql = "SELECT * FROM student";
@@ -46,8 +46,8 @@ if($result = $mysqli->query($sql)){
     echo "<tr>";
          echo "<th>#</th>";
  echo "<th>Name</th>";
- echo "<th>Address</th>";
- echo "<th>Marks</th>";
+ echo "<th>Course</th>";
+ echo "<th>Grade</th>";
  echo "<th>Action</th>";
  echo "</tr>";
  echo "</thead>";
@@ -56,12 +56,12 @@ if($result = $mysqli->query($sql)){
 echo "<tr>";
  echo "<td>" . $row['id'] . "</td>";
  echo "<td>" . $row['name'] . "</td>";
- echo "<td>" . $row['address'] . "</td>";
- echo "<td>" . $row['marks'] . "</td>";
+ echo "<td>" . $row['course'] . "</td>";
+ echo "<td>" . $row['grade'] . "</td>";
  echo "<td>";
- echo "<a href='read.php?id=". $row['id'] ."' title='View Record' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
-  echo "<a href='update.php?id=". $row['id'] ."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
-   echo "<a href='delete.php?id=". $row['id'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
+ echo "<a href='edit/readtest.php?id/". $row['id'] ."/student' title='View Record' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open text-success'></span></a>";
+  echo "<a href='edit/update.php?id/". $row['id'] ."/student' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil text-primary'></span></a>";
+   echo "<a href='edit/delete.php?id/". $row['id'] ."/student' title='this record will be deleted' bg-danger data-toggle='tooltip'><span class='glyphicon glyphicon-trash text-danger'></span></a>";
     echo "</td>";
     echo "</tr>";
       }

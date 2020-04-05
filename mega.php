@@ -1,4 +1,4 @@
-<?php
+ <?php
 class Statments{
 	private $field;
 	private $value;
@@ -9,7 +9,7 @@ class Statments{
 	private static $val = array();
 	private static $param = array();
 
-	public function Statment($v,$b,$c,$d){
+	public function statment($v,$b,$c,$d){
 		//creating an array from passed values
 		$arr = array($v,$b,$c,$d);
 
@@ -22,8 +22,12 @@ class Statments{
 		
 		//turning passed values from array to string
 		$newarr1 = implode(',', $this->field);
-		$newarr2 = implode(',', $this->value);
+		$newarr2 = "'".implode("','", $this->value)."'";
 		$newarr3 = implode('', $this->type_init);
+
+		echo $newarr2;
+		echo '<br>';
+		echo $newarr3;
 
 		//creating a corresponding number of dummy values and turning them into a string
 		        for($i = 0; $i < count($this->value); $i++){
@@ -32,11 +36,11 @@ class Statments{
 			      $vals = implode(',', self::$val);
 
 		//creating a corresponding number of dummy parameter holders and turning them into a string
-		        for($i = 0; $i < count($this->type_init); $i++){
-				self::$param[$i] = "$param".$i;
-			      }
-			      print_r(self::$param);
-			      //$params = implode(',', self::$param);
+		  //       for($i = 0; $i < count($this->type_init); $i++){
+				// self::$param[$i] = "$param".$i;
+			 //      }
+			 //      print_r(self::$param);
+			 //      //$params = implode(',', self::$param);
 
 		//conntecting to the database
 		$this->mysqli = new mysqli('localhost','root','','mega');
@@ -49,13 +53,13 @@ class Statments{
         if($stmt = $this->mysqli->prepare($sql)){
 
 			// Bind variables to the prepared statement as parameters
-			$stmt->bind_param("$newarr3", self::$param);
+			$stmt->bind_param("$newarr3", $newarr2);
 		
 
-            // Set parameters
-            for($i = 0;  $i < count($this->type_init); $i++){
-				self::$param[$i] = $this->value[$i]; 
-			}
+   //          // Set parameters
+   //          for($i = 0;  $i < count($this->type_init); $i++){
+			// 	self::$param[$i] = $this->value[$i]; 
+			// }
 		
             // Attempt to execute the prepared statement
             if($stmt->execute()){
