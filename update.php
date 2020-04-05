@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,11 +12,7 @@
 
   <title>Little diamonds admin</title>
 
-  <!-- Custom fonts for this template-->
-  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
+  
   <!-- Bootstrap core CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
@@ -25,10 +22,10 @@
 
 <body id="page-top">
     <div class="row justify-content-center mt-5">
-        <div class="col-8 text-left text-success">
-            <h2 class="font-weight-bold">View record</h2>
+        <div class="col-8 text-center text-success">
+            <h2 class="">Edit record</h2>
         </div>
-        <div class="col-md-8 pt-5 text-justify card-body">
+        <div class="col-md-6 pt-5 text-justify card-body">
 
     
 
@@ -45,13 +42,17 @@ $escaped_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
  $tables = explode('?', $escaped_url);
  $tables2 = explode('/', $tables[1]);
 
+ $ids = $tables2[1];
+ $tables = $tables2[2];
+ $fields = $tables2[0];
+
     
-    function view($ids,$tables,$fields ){
+    // function view($ids,$tables,$fields ){
 
 
         $val = explode('/', $_SERVER['HTTP_REFERER']);
-$no = count($val);
-$page = $val[$no-1];
+        $no = count($val);
+        $page = $val[$no-1];
 
         require_once 'config.php';
 
@@ -65,40 +66,47 @@ $page = $val[$no-1];
 
                 echo '
                 <div>
+      <form action="change.php" method="post" >
                  <table  class="table table-borderless">
                               <tbody>';
                               
 
                 foreach ($row as $key => $value) {
                     echo '
-                      <tr> <th>'.strtoupper($key).'</th>';
+                      <tr> 
+                        <th>'.strtoupper($key).'</th>';
 
-                    if($key == "image" || $key == "file"){
+                         if($key == "id" || $row[$key] === 0){
 
-                      echo'<td><img style="width:100px; height:100px;" src="../'.$value.'"></td></tr>';
+                     echo'<td><input class="form-control" readonly name="id" value="'.$value.'"> </td></tr>';
                       
 
                       }else{
 
-                      echo'<td>'.$value.'</td></tr>';
-                              }
-
+                      echo'<td><input class="form-control" required name="field['.$key.']" value="'.$value.'"> </td></tr>';
+                    }
+                              
                 }
 
                 echo '
                 </tbody>
-                              </table>
-                              </div>';
+                </table>
 
-                echo '<a href="../'.$page.'" class="btn btn-success btn-sm mt-5" style="width:100px;">back</a>';
+                    <input type="hidden" name="table" value="'.$tables.'">
+                    <input type="submit" class="btn btn-success btn-sm" name="">
+                    <a href="'.$page.'" class="btn btn-danger btn-sm ">cancle</a>
+                    </form>
+                </div>';
+
+                echo '';
               
         }
         
     }
 
-}
+//}
 
-view($tables2[1],$tables2[2],$tables2[0]);
+//view($tables2[1],$tables2[2],$tables2[0]);
 
 ?>
 

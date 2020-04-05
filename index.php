@@ -35,7 +35,7 @@
 </div>
  <?php
 // Include config file
-require_once 'edit/config.php';
+require_once 'config.php';
                     
 // Attempt select query execution
 $sql = "SELECT * FROM student";
@@ -59,9 +59,9 @@ echo "<tr>";
  echo "<td>" . $row['course'] . "</td>";
  echo "<td>" . $row['grade'] . "</td>";
  echo "<td>";
- echo "<a href='edit/readtest.php?id/". $row['id'] ."/student' title='View Record' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open text-success'></span></a>";
-  echo "<a href='edit/update.php?id/". $row['id'] ."/student' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil text-primary'></span></a>";
-   echo "<a href='edit/delete.php?id/". $row['id'] ."/student' title='this record will be deleted' bg-danger data-toggle='tooltip'><span class='glyphicon glyphicon-trash text-danger'></span></a>";
+ echo "<a href='readtest.php?id/". $row['id'] ."/student' title='View Record' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open text-success'></span></a>";
+  echo "<a href='update.php?id/". $row['id'] ."/student' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil text-primary'></span></a>";
+   echo "<a href='delete.php?id/". $row['id'] ."/student' title='this record will be deleted' bg-danger data-toggle='tooltip'><span class='glyphicon glyphicon-trash text-danger'></span></a>";
     echo "</td>";
     echo "</tr>";
       }

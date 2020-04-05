@@ -1,5 +1,5 @@
 <?php
-include('../validateClass1.php');
+include('validate.php');
 include('config.php');
 
 
@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 	if((array_sum($feedbk))/(count($_POST['field'])) == 1){
-		header("Location: ../index.php");
+		header("Location: index.php");
 		
 			}else{
 	     header("Location: update.php");

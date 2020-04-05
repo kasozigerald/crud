@@ -22,9 +22,7 @@ $escaped_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
    echo $id." ".$table. " ". $field;
     
 
-// Check existence of id parameter before processing further
-// if(isset($id) && !empty(trim($id))){
-    // Include config file
+
     require_once 'config.php';
     
     // Prepare a select statement
@@ -39,7 +37,7 @@ $escaped_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
         // Attempt to execute the prepared statement
         if($stmt->execute()){
             // Records deleted successfully. Redirect to landing page
-            header("location: ../". $page);
+            header("location: ". $page);
             exit();
 
         } else{
@@ -52,12 +50,5 @@ $escaped_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
     
     // Close connection
     $mysqli->close();
-// } else{
-//     // Check existence of id parameter
-//     if(empty($id)){
-//         // URL doesn't contain id parameter. Redirect to error page
-//         header("location: ../error.php");
-//         exit();
-//     }
-// }
+// 
 ?>

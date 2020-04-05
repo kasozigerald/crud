@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +11,6 @@
 
   <title>Little diamonds admin</title>
 
-  
   <!-- Bootstrap core CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
@@ -25,10 +20,10 @@
 
 <body id="page-top">
     <div class="row justify-content-center mt-5">
-        <div class="col-8 text-center text-success">
-            <h2 class="">Edit record</h2>
+        <div class="col-8 text-left text-success">
+            <h2 class="font-weight-bold">View record</h2>
         </div>
-        <div class="col-md-6 pt-5 text-justify card-body">
+        <div class="col-md-8 pt-5 text-justify card-body">
 
     
 
@@ -45,17 +40,13 @@ $escaped_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
  $tables = explode('?', $escaped_url);
  $tables2 = explode('/', $tables[1]);
 
- $ids = $tables2[1];
- $tables = $tables2[2];
- $fields = $tables2[0];
-
     
-    // function view($ids,$tables,$fields ){
+    function view($ids,$tables,$fields ){
 
 
         $val = explode('/', $_SERVER['HTTP_REFERER']);
-        $no = count($val);
-        $page = $val[$no-1];
+$no = count($val);
+$page = $val[$no-1];
 
         require_once 'config.php';
 
@@ -69,47 +60,40 @@ $escaped_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
 
                 echo '
                 <div>
-      <form action="change.php" method="post" >
                  <table  class="table table-borderless">
                               <tbody>';
                               
 
                 foreach ($row as $key => $value) {
                     echo '
-                      <tr> 
-                        <th>'.strtoupper($key).'</th>';
+                      <tr> <th>'.strtoupper($key).'</th>';
 
-                         if($key == "id" || $row[$key] === 0){
+                    if($key == "image" || $key == "file"){
 
-                     echo'<td><input class="form-control" readonly name="id" value="'.$value.'"> </td></tr>';
+                      echo'<td><img style="width:100px; height:100px;" src="../'.$value.'"></td></tr>';
                       
 
                       }else{
 
-                      echo'<td><input class="form-control" required name="field['.$key.']" value="'.$value.'"> </td></tr>';
-                    }
-                              
+                      echo'<td>'.$value.'</td></tr>';
+                              }
+
                 }
 
                 echo '
                 </tbody>
-                </table>
+                              </table>
+                              </div>';
 
-                    <input type="hidden" name="table" value="'.$tables.'">
-                    <input type="submit" class="btn btn-success btn-sm" name="">
-                    <a href="../'.$page.'" class="btn btn-danger btn-sm ">cancle</a>
-                    </form>
-                </div>';
-
-                echo '';
+                echo '<a href="'.$page.'" class="btn btn-success btn-sm mt-5" style="width:100px;">back</a>';
               
         }
         
     }
 
-//}
+}
 
-//view($tables2[1],$tables2[2],$tables2[0]);
+view($tables2[1],$tables2[2],$tables2[0]);
 
 ?>
 
